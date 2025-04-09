@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description"
+          content="Shape Your Ground: Refining Road Surfaces Beyond Planar Representations.">
+    <meta name="keywords" content="Road, Ground, NURBS, Parametric, Surface, Refinement, Shape, FlexRoad">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shape Your Ground: Refining Road Surfaces Beyond Planar Representations</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-PYVRSFMDRL');
+    </script>
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="icon" href="./static/images/favicon.ico">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column has-text-centered">
+                    <h1 class="title is-1 publication-title">Shape Your Ground: Refining Road Surfaces Beyond Planar
+                        Representations</h1>
+                    <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/oussema-dhaouadi/">Oussema Dhaouadi</a><sup>1,2,3</sup>
+            </span>
+                        <span class="author-block">
+              <a href="https://www.linkedin.com/in/johannes-meier-52a159b4/">Johannes Meier</a><sup>1,2,3</sup>&nbsp;&nbsp;&nbsp;</span>
+                        <span class="author-block">
+              <a href="https://www.linkedin.com/in/jacqueskaiser/">Jacques Kaiser</a><sup>1</sup>&nbsp;&nbsp;&nbsp;
+            </span>
+                        <span class="author-block">
+              <a href="https://cvg.cit.tum.de/members/cremers">Daniel Cremers</a><sup>2,3</sup>
+            </span>
+                    </div>
+
+                    <div class="is-size-5 publication-authors">
+                        <span class="author-block"><sup>1</sup> DeepScenario</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="author-block"><sup>2</sup> TUM</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="author-block"><sup>3</sup> MCML</span>
+                    </div>
+
+
+                    <div class="column has-text-centered">
+                        <div class="publication-links">
+                            <!-- PDF Link. -->
+                            <span class="link-block">
+                <a href="https://arxiv.org/pdf/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+                            <span class="link-block">
+                <a href="https://arxiv.org/abs/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+                            <!-- Video Link. -->
+                            <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+                            <!-- Dataset Link. -->
+                            <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+              </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="hero teaser">
+    <div class="container">
+        <div class="hero-body">
+            <video id="teaser" autoplay muted loop playsinline height="100%">
+                <source src="./static/videos/teaser.mp4"
+                        type="video/mp4">
+            </video>
+            <h2 class="subtitle has-text-centered">
+                <span class="method">FlexRoad</span> turns noisy aerial road data into smooth, accurate and realistic 3D
+                road surfaces for autonomous driving and virtual worlds.
+            </h2>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Abstract</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        Road surface reconstruction from aerial images is fundamental for autonomous driving, urban
+                        planning,
+                        and virtual simulation, where <b>smoothness</b>, <b>compactness</b>, and <b>accuracy</b> are
+                        critical quality factors.
+                        Existing reconstruction methods often produce artifacts and inconsistencies that limit
+                        usability,
+                        while downstream tasks have a tendency to represent roads as planes for simplicity but at the
+                        cost of accuracy.
+                    </p>
+                    We introduce <span class="method">FlexRoad</span>, the first framework to directly address road
+                    surface smoothing by
+                    fitting Non-Uniform Rational B-Splines (NURBS) surfaces to 3D road points obtained from
+                    photogrammetric
+                    reconstructions or geodata providers. Our method at its core utilizes the <b>Elevation-Constrained
+                    Spatial Road
+                    Clustering (ECSRC) algorithm</b> for robust anomaly correction, significantly reducing surface
+                    roughness and
+                    fitting errors. To facilitate quantitative comparison between road surface reconstruction methods,
+                    we present
+                    <b>GeoRoad Dataset (GeRoD)</b>, a diverse collection of road surface and terrain profiles derived
+                    from openly
+                    accessible geodata. Experiments on GeRoD and the photogrammetry-based <b>DeepScenario Open 3D
+                    Dataset (DSC3D)</b>
+                    demonstrate that <span class="method">FlexRoad</span> considerably surpasses commonly used road
+                    surface representations across various
+                    metrics while being insensitive to various input sources, terrains, and noise types. By performing
+                    ablation
+                    studies, we identify the key role of each component towards high-quality reconstruction performance,
+                    making <span class="method">FlexRoad</span> a generic method for <b>realistic road surface
+                    modeling</b>.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!--/ Abstract. -->
+
+        <!-- Paper video. -->
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Video</h2>
+                <div class="publication-video">
+                    <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        <!--/ Paper video. -->
+    </div>
+</section>
+
+
+<section class="hero is-light is-small">
+    <div class="hero-body">
+        <div class="container">
+            <center><h2 class="title is-3">Ground Modeling</h2></center>
+            <br>
+            <center><h3 class="title is-4">GeRoD Dataset</h3></center>
+            <br>
+            <div id="results-gerod" class="carousel results-carousel">
+                <div class="item item-296500_5629250">
+                    <video id="chair-296500_5629250" autoplay controls muted loop playsinline height="100%">
+                        <source src="./static/videos/296500_5629250.mp4" type="video/mp4">
+                    </video>
+                    <div class="name">296500_5629250</div>
+                </div>
+                <div class="item item-296750_5629250">
+                    <video poster="" id="296750_5629250" autoplay controls muted loop playsinline height="100%">
+                        <source src="./static/videos/296750_5629250.mp4"
+                                type="video/mp4">
+                    </video>
+                    <div class="name">296750_5629250</div>
+                </div>
+                <div class="item item-346250_5676500">
+                    <video poster="" id="346250_5676500" autoplay controls muted loop playsinline height="100%">
+                        <source src="./static/videos/346250_5676500.mp4"
+                                type="video/mp4">
+                    </video>
+                    <div class="name">346250_5676500</div>
+                </div>
+                <div class="item item-346750_5676500">
+                    <video poster="" id="346750_5676500" autoplay controls muted loop playsinline height="100%">
+                        <source src="./static/videos/346750_5676500.mp4"
+                                type="video/mp4">
+                    </video>
+                    <div class="name">346750_5676500</div>
+
+                </div>
+                <div class="item item-354000_5700750">
+                    <video poster="" id="354000_5700750" autoplay controls muted loop playsinline height="100%">
+                        <source src="./static/videos/354000_5700750.mp4"
+                                type="video/mp4">
+                    </video>
+                    <div class="name">354000_5700750</div>
+
+                </div>
+                <div class="item item-359250_5654000">
+                    <video poster="" id="359250_5654000" autoplay controls muted loop playsinline height="100%">
+                        <source src="./static/videos/359250_5654000.mp4"
+                                type="video/mp4">
+                    </video>
+                    <div class="name">359250_5654000</div>
+
+                </div>
+                <div class="item item-369250_5680750">
+                    <video poster="" id="369250_5680750" autoplay controls muted loop playsinline height="100%">
+                        <source src="./static/videos/369250_5680750.mp4"
+                                type="video/mp4">
+                    </video>
+                    <div class="name">369250_5680750</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="hero is-light is-small">
+    <div class="hero-body">
+        <div class="container">
+            <center><h3 class="title is-4">DSC3D Dataset</h3></center>
+            <br>
+            <div id="results-dsc3d" class="carousel results-carousel">
+                <div class="item item-visionary_san_francisco">
+                    <video poster="" id="visionary_san_francisco" autoplay controls muted loop playsinline
+                           height="100%">
+                        <source src="./static/videos/visionary_san_francisco.mp4"
+                                type="video/mp4">
+                    </video>
+                    <div class="name">Visionary San Francisco</div>
+
+                </div>
+                <div class="item item-vibrant_berlin">
+                    <video poster="" id="vibrant_berlin" autoplay controls muted loop playsinline height="100%">
+                        <source src="./static/videos/vibrant_berlin.mp4"
+                                type="video/mp4">
+                    </video>
+                    <div class="name">Vibrant Berlin</div>
+
+                </div>
+                <div class="item item-stunning_stuttgart">
+                    <video poster="" id="stunning_stuttgart" autoplay controls muted loop playsinline height="100%">
+                        <source src="./static/videos/stunning_stuttgart.mp4"
+                                type="video/mp4">
+                    </video>
+                    <div class="name">Stunning Stuttgart</div>
+
+                </div>
+                <div class="item item-great_munich">
+                    <video poster="" id="great_munich" autoplay controls muted loop playsinline height="100%">
+                        <source src="./static/videos/great_munich.mp4"
+                                type="video/mp4">
+                    </video>
+                    <div class="name">Great Munich</div>
+
+                </div>
+                <div class="item item-fabulous_sindelfingen">
+                    <video poster="" id="fabulous_sindelfingen" autoplay controls muted loop playsinline height="100%">
+                        <source src="./static/videos/fabulous_sindelfingen.mp4"
+                                type="video/mp4">
+                    </video>
+                    <div class="name">Fabulous Sindelfingen</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section">
+    <div class="container is-max-desktop">
+
+        <!-- Animation. -->
+        <div class="columns is-centered">
+            <div class="column is-full-width">
+                <h2 class="title is-3">Results</h2>
+
+                <!-- Errors. -->
+                <h3 class="title is-4">Fitting Errors</h3>
+                <p>
+                    The error is computed as the distance between the fitted ground and the digital surface model
+                    (DSM). <br>
+                    Use the slider to control the alpha (transparency) value of the fitting error heatmap.
+                </p>
+                <center><img src="./static/images/colorbar_errors.png" width="100%"></center>
+                <div class="content has-text-justified">
+                    <center><h3 class="title is-4">GeRoD Dataset</h3></center>
+                    <p>The DSMs are obtained through airborne laser scanning (LiDAR) surveys conducted by the <a
+                            target="_blank" href="https://opengeodata.lgl-bw.de/">State Office for Geoinformation and
+                        Land Development (LGL)</a> in Baden-Württemberg.<br></p>
+                    <div class="columns is-centered">
+
+                        <div class="column">
+                            <div class="content">
+                                <iframe
+                                        src="./static/htmls/296000_5629250_errors.html"
+                                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+                                        style="width: 350px; height: 350px" scrolling="no"></iframe>
+                                <center>296000_5629250</center>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="content">
+                                <iframe
+                                        src="./static/htmls/296500_5629250_errors.html"
+                                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+                                        style="width: 350px; height: 350px" scrolling="no"></iframe>
+                                <center>296500_5629250</center>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="content">
+                                <iframe
+                                        src="./static/htmls/296750_5629250_errors.html"
+                                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+                                        style="width: 350px; height: 350px" scrolling="no"></iframe>
+                                <center>296750_5629250</center>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns is-centered">
+                        <div class="column">
+                            <div class="content">
+                                <iframe
+                                        src="./static/htmls/346250_5676500_errors.html"
+                                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+                                        style="width: 350px; height: 350px" scrolling="no"></iframe>
+                                <center>346250_5676500</center>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="content">
+                                <iframe
+                                        src="./static/htmls/346750_5676500_errors.html"
+                                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+                                        style="width: 350px; height: 350px" scrolling="no"></iframe>
+                                <center>346750_5676500</center>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="content">
+                                <iframe
+                                        src="./static/htmls/354000_5700750_errors.html"
+                                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+                                        style="width: 350px; height: 350px" scrolling="no"></iframe>
+                                <center>354000_5700750</center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content has-text-justified">
+                    <center><h3 class="title is-4">DSC3D Dataset</h3></center>
+                    <p>The DSMs are obtained from the photogrammetric reconstruction of the scene. <br></p>
+                    <div class="columns is-centered">
+
+                        <div class="column">
+                            <div class="content">
+                                <iframe
+                                        src="./static/htmls/visionary_san_francisco_errors.html"
+                                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+                                        style="width: 350px; height: 350px" scrolling="no"></iframe>
+                                <center>Visionary San Francisco</center>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="content">
+                                <iframe
+                                        src="./static/htmls/vibrant_berlin_errors.html"
+                                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+                                        style="width: 350px; height: 350px" scrolling="no"></iframe>
+                                <center>Vibrant Berlin</center>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="content">
+                                <iframe
+                                        src="./static/htmls/stunning_stuttgart_errors.html"
+                                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+                                        style="width: 350px; height: 350px" scrolling="no"></iframe>
+                                <center>Stunning Stuttgart</center>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns is-centered">
+                        <div class="column">
+                            <div class="content">
+                                <iframe
+                                        src="./static/htmls/great_munich_errors.html"
+                                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+                                        style="width: 350px; height: 350px" scrolling="no"></iframe>
+                                <center>Vibrant Berlin</center>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="content">
+                                <iframe
+                                        src="./static/htmls/fabulous_sindelfingen_errors.html"
+                                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+                                        style="width: 350px; height: 350px" scrolling="no"></iframe>
+                                <center>Fabulous Sindelfingen</center>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="content">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br/>
+
+
+                <h3 class="title is-4">Smoothness</h3>
+                <p>
+                    The smoothness represented by the MAD value is the average angle between adjacent face normals,
+                    constrained between 0 and 90 degrees. <br>
+                    Use the slider to control the alpha (transparency) value of the smoothness heatmap.
+                </p>
+                <center><img src="./static/images/colorbar_smoothness.png" width="100%"></center>
+                <div class="content has-text-justified">
+                    <center><h3 class="title is-4">GeRoD Dataset</h3></center>
+                    <div class="columns is-centered">
+
+                        <div class="column">
+                            <div class="content">
+                                <iframe
+                                        src="./static/htmls/296000_5629250_smoothness.html"
+                                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+                                        style="width: 350px; height: 350px" scrolling="no"></iframe>
+                                <center>296000_5629250</center>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="content">
+                                <iframe
+                                        src="./static/htmls/296500_5629250_smoothness.html"
+                                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+                                        style="width: 350px; height: 350px" scrolling="no"></iframe>
+                                <center>296500_5629250</center>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="content">
+                                <iframe
+                                        src="./static/htmls/296750_5629250_smoothness.html"
+                                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+                                        style="width: 350px; height: 350px" scrolling="no"></iframe>
+                                <center>296750_5629250</center>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns is-centered">
+                        <div class="column">
+                            <div class="content">
+                                <iframe
+                                        src="./static/htmls/346250_5676500_smoothness.html"
+                                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+                                        style="width: 350px; height: 350px" scrolling="no"></iframe>
+                                <center>346250_5676500</center>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="content">
+                                <iframe
+                                        src="./static/htmls/346750_5676500_smoothness.html"
+                                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+                                        style="width: 350px; height: 350px" scrolling="no"></iframe>
+                                <center>346750_5676500</center>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="content">
+                                <iframe
+                                        src="./static/htmls/354000_5700750_smoothness.html"
+                                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+                                        style="width: 350px; height: 350px" scrolling="no"></iframe>
+                                <center>354000_5700750</center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content has-text-justified">
+                    <center><h3 class="title is-4">DSC3D Dataset</h3></center>
+                    <div class="columns is-centered">
+
+                        <div class="column">
+                            <div class="content">
+                                <iframe
+                                        src="./static/htmls/visionary_san_francisco_smoothness.html"
+                                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+                                        style="width: 350px; height: 350px" scrolling="no"></iframe>
+                                <center>Visionary San Francisco</center>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="content">
+
+                                <iframe
+                                        src="./static/htmls/vibrant_berlin_smoothness.html"
+                                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+                                        style="width: 350px; height: 350px" scrolling="no"></iframe>
+                                <center>Vibrant Berlin</center>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="content">
+                                <iframe
+                                        src="./static/htmls/stunning_stuttgart_smoothness.html"
+                                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+                                        style="width: 350px; height: 350px" scrolling="no"></iframe>
+                                <center>Stunning Stuttgart</center>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns is-centered">
+                        <div class="column">
+                            <div class="content">
+                                <iframe
+                                        src="./static/htmls/great_munich_smoothness.html"
+                                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+                                        style="width: 350px; height: 350px" scrolling="no"></iframe>
+                                <center>Vibrant Berlin</center>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="content">
+                                <iframe
+                                        src="./static/htmls/fabulous_sindelfingen_smoothness.html"
+                                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+                                        style="width: 350px; height: 350px" scrolling="no"></iframe>
+                                <center>Fabulous Sindelfingen</center>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="content">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+        <h2 class="title">BibTeX</h2>
+        <pre><code>@inproceedings{dhaouadi2025flexroad,
+  title     = {Shape Your Ground: Refining Road Surfaces Beyond Planar Representations},
+  author    = {Dhaouadi, Oussema and Meier, Johannes and Kaiser, Jacques and Cremers, Daniel},
+  booktitle={2025 IEEE Intelligent Vehicles Symposium},
+  year={2025},
+  organization={IEEE}
+}</code></pre>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-8">
+                <div class="content">
+
+                    <p>
+                        This page was built using the <a
+                            href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                            target="_blank">Academic Project Page Template</a> which was adopted from the <a
+                            href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
