@@ -92,20 +92,11 @@
                   <span>arXiv</span>
                 </a>
               </span>
-                            <!-- Video Link. -->
-                            <span class="link-block">
-                <a href=""
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-youtube"></i>
-                  </span>
-                  <span>Video</span>
-                </a>
-              </span>
+
                             <!-- Dataset Link. -->
                             <span class="link-block">
-                <a href=""
-                   class="external-link button is-normal is-rounded is-dark">
+                <a href="https://cvg.cit.tum.de/webshare/g/papers/Dhaouadi/dhaouadi2025flexroad/"
+                   class="external-link button is-normal is-rounded is-dark" target="_blank">
                   <span class="icon">
                       <i class="far fa-images"></i>
                   </span>
@@ -198,10 +189,33 @@
 <section class="hero is-light is-small">
     <div class="hero-body">
         <div class="container">
-            <center><h2 class="title is-3">Ground Modeling</h2></center>
+            <center><h2 class="title is-3">The GeRoD Dataset</h2></center>
+            <br>
+            <img src="./static/images/dataset.png" width="100%">
+            <div class="content has-text-justified">
+                <p>
+                    GeRoD dataset comprises 14,482 million points from Airborne Laser Scaning from
+                    <a href="https://www.geoportal.nrw/" target="_blank">Geobasis NRW</a> (under Data License Germany -
+                    Zero - Version 2.0),
+                    including DSMs and DTMs with 1m precision and ±10cm error.<br>
+                    High-resolution DOPs cover 240 locations of 250m × 250m tiles across urban (168), sub-urban (23),
+                    and rural (49) areas. The dataset features an average elevation difference of 54.7m with roads
+                    covering 18% of the total area.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="hero is-small">
+    <div class="hero-body">
+        <div class="container">
+            <center><h2 class="title is-3">Ground Modeling - FlexRoad</h2></center>
             <br>
             <center><h3 class="title is-4">GeRoD Dataset</h3></center>
             <br>
+            The input data for <span class="method">FlexRoad</span> consists of DOPs and DSMs originally derived from
+            LiDAR scans. The DOPs are utilized to extract road points.
             <div id="results-gerod" class="carousel results-carousel">
                 <div class="item item-296500_5629250">
                     <video id="chair-296500_5629250" autoplay controls muted loop playsinline height="100%">
@@ -261,11 +275,13 @@
 </section>
 
 
-<section class="hero is-light is-small">
+<section class="hero is-small">
     <div class="hero-body">
         <div class="container">
             <center><h3 class="title is-4">DSC3D Dataset</h3></center>
             <br>
+            The input data for <span class="method">FlexRoad</span> consists of DOPs and DSMs obtained from
+            photogrammetric 3D reconstructions using SfM. The DOPs are used to extract road points.
             <div id="results-dsc3d" class="carousel results-carousel">
                 <div class="item item-visionary_san_francisco">
                     <video poster="" id="visionary_san_francisco" autoplay controls muted loop playsinline
