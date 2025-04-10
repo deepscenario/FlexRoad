@@ -98,6 +98,20 @@ body {
     border-radius: 10px !important;
 }
 
+.is-light a {
+    color: #3273dc !important;
+    cursor: pointer;
+    text-decoration: none
+}
+
+.is-light a strong {
+    color: currentColor !important;
+}
+
+.is-light a:hover {
+    color: #363636 !important;
+}
+
 .publication-video iframe {
     position: absolute;
     top: 0;
@@ -109,10 +123,30 @@ body {
 .publication-body img {
 }
 
+.section {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.samples-carousel {
+    overflow: hidden;
+    padding-bottom: 30px;
+}
+
+
+.samples-carousel .item {
+    margin: 5px;
+    overflow: hidden;
+    padding: 0;
+    font-size: 0;
+    width: 335px;
+}
+
 .results-carousel {
     overflow: hidden;
-    height: 890px;
+    padding-bottom: 30px;
 }
+
 
 .results-carousel .item {
     margin: 5px;
